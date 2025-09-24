@@ -1,18 +1,16 @@
 const express=require('express');
 const app=express();
 const path=require('node:path');
+const indexRouter = require('./routers/indexRouter');
+const loginRouter = require('./routers/loginRouter');
 
 app.use(express.static(path.join(__dirname, 'public')));
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
 
-app.get('/',(req,res)=>{
-    res.render('index');
-});
+app.use('/', indexRouter);
 
-app.get('/login',(req,res)=>{
-    res.render('login');
-});
+app.use('/login', loginRouter);
 
 app.get ('/register',(req,res)=>{
     res.render('register');
