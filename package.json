@@ -20,5 +20,9 @@
   "homepage": "https://github.com/Fopuy/document-uploader#readme",
   "devDependencies": {
     "prisma": "^6.16.2"
+  },
+  "dependencies": {
+    "@quixo3/prisma-session-store": "^3.1.13",
+    "express-session": "^1.18.2"
   }
 }
