@@ -7,6 +7,12 @@
     <title>Home</title>
 </head>
 <body>
+    <% if (user) { %>
+        <p>Welcome, <%= user.username %>!</p>
+        <form action="/logout" method="post">
+            <button type="submit">Logout</button>
+        </form>
+    <% } else { %>
     <h1>Document Uploader</h1>
     <div class="main-form" style="display: flex; flex-direction: column; width: 200px;">
         <form action="/upload" method="post" enctype="multipart/form-data">
@@ -16,5 +22,6 @@
         <a href="/login">Login</a>
         <a href="/register">Register</a>
     </div>
+    <% } %>
 </body>
 </html>
