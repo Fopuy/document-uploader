@@ -3,18 +3,19 @@ const app=express();
 const path=require('node:path');
 const indexRouter = require('./routers/indexRouter');
 const loginRouter = require('./routers/loginRouter');
+const registerRouter = require('./routers/registerRouter');
 
 app.use(express.static(path.join(__dirname, 'public')));
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
 
+app.use(express.urlencoded({ extended: true }));
+
 app.use('/', indexRouter);
 
 app.use('/login', loginRouter);
 
-app.get ('/register',(req,res)=>{
-    res.render('register');
-});
+app.use('/register', registerRouter);
 
 app.use((req, res, next) => {
   res.status(404).render("404", {
