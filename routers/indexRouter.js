@@ -2,18 +2,26 @@ const express = require('express');
 const router = express.Router();
 const multer  = require('multer')
 const upload = multer({ dest: './public/uploads/' })
+const indexController = require('../controllers/indexController');
+const { PrismaClient } = require('../generated/prisma');
+const prisma = new PrismaClient();
 
-router.get('/', (req, res) => {
-    res.render('index', { user: req.user });
+router.get('/', async (req, res) => {
+    const files = await prisma.file.findMany({
+    select: {
+        filename: true,
+        originalFileName: true,
+        fileSize: true,
+        userId: true,
+    },
+    orderBy: { 
+        uploadedAt: 'desc'
+    }})
+    res.render('index', { 
+        user: req.user,
+        files: files, });
 });
 
-router.post('/', upload.single('document'), (req, res) => {
-    if (!req.file) {
-        return res.status(400).send('No file uploaded.');
-    }
-    // File information is available in req.file
-    console.log(req.file);
-    res.send('File uploaded successfully.');
-});
+router.post('/', upload.single('document'), indexController.uploadFile);
 
 module.exports = router;

@@ -6,7 +6,7 @@ const render = (req, res) => {
     res.render('register');
 }
 
-const register= async (req, res) => {
+const register = async (req, res) => {
     const { username, email, password} = req.body;
     const hashedPassword = await bcrypt.hash(password, 10);
     await prisma.user.create({

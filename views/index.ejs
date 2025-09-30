@@ -14,6 +14,12 @@
             <button type="submit">Upload Document</button>
         </form>
         <br>
+        <% files.forEach(file => { %>
+            <div>
+                <p>Filename: <%= file.originalFileName %> | Size: <%= (file.fileSize / 1024).toFixed(2) %> KB</p>
+                <a href="./uploads/<%= file.filename %>" download>Download</a>
+            </div>
+        <% }) %>
         <form action="/logout" method="post"></form>
             <button type="submit">Logout</button>
         </form>
