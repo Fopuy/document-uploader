@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/style.css">
+    <title>Folder</title>
+</head>
+<body>
+<body>
+  <% if (user) { %>
+    <h1>Welcome, <%= user.username %>!</h1>
+
+    <% if (currentFolder) { %>
+      <p>Inside folder: <%= currentFolder.name %></p>
+      <a href="<%= currentFolder.parentId ? '/folders/' + currentFolder.parentId : '/folders' %>">⬅️ Back</a>
+    <% } else { %>
+      <p>You are in root</p>
+    <% } %>
+
+    <h2>Folders</h2>
+    <ul>
+      <% folders.forEach(f => { %>
+        <li><a href="/folders/<%= f.id %>"><%= f.name %></a></li>
+      <% }) %>
+    </ul>
+
+    <h2>Files</h2>
+    <ul>
+      <% files.forEach(file => { %>
+        <li><%= file.originalFileName %> (<%= file.fileSize %> bytes)</li>
+      <% }) %>
+    </ul>
+
+    <form action="/folders/create" method="post">
+      <input type="hidden" name="parentId" value="<%= currentFolder ? currentFolder.id : '' %>">
+      <input type="text" name="folderName" placeholder="New folder name" required>
+      <button type="submit">Create Folder</button>
+    </form>
+    <br>
+    <form action="/logout" method="post">
+        <button type="submit">Logout</button>
+    </form>
+
+  <% } else { %>
+    <p>Please <a href="/login">login</a>.</p>
+  <% } %>
+</body>
+</html>
+</body>
+</html>

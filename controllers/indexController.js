@@ -8,15 +8,17 @@ const uploadFile = async (req, res) => {
         return res.status(400).send('No file uploaded.');
     }
     await prisma.file.create({
-        data: {
+        data: { 
             filename: req.file.filename,
             fileSize: req.file.size,
             originalFileName: req.file.originalname,
             uploadedAt: req.file.uploadedAt,
-            userId: req.user.id
+            userId: req.user.id,
+            folderId: req.body.folderId || null
         }
     })
     res.redirect('/');
 };
+
 
 module.exports = { uploadFile };

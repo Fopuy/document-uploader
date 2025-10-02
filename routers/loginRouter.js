@@ -48,7 +48,7 @@ passport.deserializeUser(async (id, done) => {
 router.post(
   "/",
   passport.authenticate("local", {
-    successRedirect: "/",
+    successRedirect: "/folders",
     failureRedirect: "/"
   })
 );

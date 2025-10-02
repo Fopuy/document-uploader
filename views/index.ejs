@@ -6,30 +6,12 @@
     <link rel="stylesheet" href="/style.css">
     <title>Home</title>
 </head>
-<body>
-    <% if (user) { %>
-        <p>Welcome, <%= user.username %>!</p>
-        <form action="/" method="post" enctype="multipart/form-data">
-            <input type="file" name="document" required>
-            <button type="submit">Upload Document</button>
-        </form>
-        <br>
-        <% files.forEach(file => { %>
-            <div>
-                <p>Filename: <%= file.originalFileName %> | Size: <%= (file.fileSize / 1024).toFixed(2) %> KB</p>
-                <a href="./uploads/<%= file.filename %>" download>Download</a>
-            </div>
-        <% }) %>
-        <form action="/logout" method="post"></form>
-            <button type="submit">Logout</button>
-        </form>
-    <% } else { %>  
+<body>    
     <h1>Document Uploader</h1>
     <div class="main-form" style="display: flex; flex-direction: column; width: 200px;">
         <p>Please log in or register to upload documents.</p>
         <a href="/login">Login</a>
         <a href="/register">Register</a>
     </div>
-    <% } %>
 </body>
 </html>
